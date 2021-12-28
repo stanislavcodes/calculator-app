@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="theme-0">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -20,27 +20,27 @@
     <link rel="stylesheet" href="css/style.css" />
     <title>Frontend Mentor | Calculator app</title>
   </head>
-  <body class="container container-0">
+  <body class="container">
     <div class="calculator-box">
-      <header class="header">
+      <header class="header flex">
         <h3>calc</h3>
-        <div class="toggler-box">
+        <div class="toggler-box flex">
           <p>THEME</p>
           <div class="toggler">
-            <div class="toggler-states">
+            <div class="toggler-states flex">
               <span>1</span>
               <span>2</span>
               <span>3</span>
             </div>
-            <div class="toggler-switch toggler-switch-0">
-              <div class="toggler-btn toggler-btn-0"></div>
+            <div class="toggler-switch flex">
+              <div class="toggler-btn"></div>
             </div>
           </div>
         </div>
       </header>
 
-      <div class="screen screen-0">
-        <div class="attribution attribution-0">
+      <div class="screen flex">
+        <div class="attribution flex">
           <span
             >Challenge by<a
               href="https://www.frontendmentor.io?ref=challenge"
@@ -48,68 +48,79 @@
               >Frontend Mentor</a
             >.</span
           ><br />
-          <span>Coded by <a href="https://www.instagram.com/stanislav.codes/">Stanislav Korchevskyi</a>.</span>
+          <span
+            >Coded by
+            <a href="https://www.instagram.com/stanislav.codes/"
+              >Stanislav Korchevskyi</a
+            >.</span
+          >
         </div>
         <p class="result">0</p>
       </div>
 
-      <div class="key-box key-box-0">
-        <div class="key key-0 number one" data-num="1">
-          <span>1</span>
-        </div>
-        <div class="key key-0 number two" data-num="2">
-          <span>2</span>
-        </div>
-        <div class="key key-0 number three" data-num="3">
-          <span>3</span>
-        </div>
-        <div class="key key-0 number four" data-num="4">
-          <span>4</span>
-        </div>
-        <div class="key key-0 number five" data-num="5">
-          <span>5</span>
-        </div>
-        <div class="key key-0 number six" data-num="6">
-          <span>6</span>
-        </div>
-        <div class="key key-0 number seven" data-num="7">
+      <div class="key-box">
+        <div class="key number seven" data-num="7">
           <span>7</span>
         </div>
-        <div class="key key-0 number eight" data-num="8">
+        <div class="key number eight" data-num="8">
           <span>8</span>
         </div>
-        <div class="key key-0 number nine" data-num="9">
+        <div class="key number nine" data-num="9">
           <span>9</span>
         </div>
-        <div class="key key-0 number zero" data-num="0">
-          <span>0</span>
-        </div>
-        <div class="key key-0 point" data-num=".">
-          <span>.</span>
-        </div>
-        <div class="key key-0 operation divide" data-op="/">
-          <span>/</span>
-        </div>
-        <div class="key key-0 operation multiply" data-op="*">
-          <span>x</span>
-        </div>
-        <div class="key key-0 operation add" data-op="+">
-          <span>+</span>
-        </div>
-        <div class="key key-0 operation subtract" data-op="-">
-          <span>-</span>
-        </div>
-        <div class="key del del-0">
+        <div class="key del">
           <span>DEL</span>
         </div>
-        <div class="key reset reset-0">
+        <div class="key number four" data-num="4">
+          <span>4</span>
+        </div>
+        <div class="key number five" data-num="5">
+          <span>5</span>
+        </div>
+        <div class="key number six" data-num="6">
+          <span>6</span>
+        </div>
+        <div class="key operation add" data-op="+">
+          <span>+</span>
+        </div>
+        <div class="key number one" data-num="1">
+          <span>1</span>
+        </div>
+        <div class="key number two" data-num="2">
+          <span>2</span>
+        </div>
+        <div class="key number three" data-num="3">
+          <span>3</span>
+        </div>
+        <div class="key operation subtract" data-op="-">
+          <span>-</span>
+        </div>
+        <div class="key point" data-num=".">
+          <span>.</span>
+        </div>        
+        <div class="key number zero" data-num="0">
+          <span>0</span>
+        </div>
+        <div class="key operation divide" data-op="/">
+          <span>/</span>
+        </div>
+        <div class="key operation multiply" data-op="*">
+          <span>x</span>
+        </div>
+        <div class="key reset">
           <span>RESET</span>
         </div>
-        <div class="key equal equal-0">
+        <div class="key equal">
           <span>=</span>
         </div>
       </div>
     </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"
+      integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script src="js/script.js"></script>
   </body>
 </html>

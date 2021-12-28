@@ -1,62 +1,45 @@
-// theme switcher
-const toggler = document.querySelector(".toggler");
-const container = document.querySelector(".container");
-const screen = document.querySelector(".screen");
-const attribution = document.querySelector(".attribution");
-const togglerBtn = document.querySelector(".toggler-btn");
-const togglerSwitch = document.querySelector(".toggler-switch");
-const keyBox = document.querySelector(".key-box");
+// listener to hide attribution
 const keys = document.querySelectorAll(".key");
-
+const attribution = document.querySelector(".attribution");
 keys.forEach((key) => {
   key.addEventListener("click", () => {
-    attribution.style.display = "none";
+    gsap.fromTo(".attribution", { opacity: 1, x:0 }, { opacity: 0, x: 80, duration: 0.25});
+    setTimeout(() => {
+      attribution.style.display = "none"
+    }, 250);
   });
 });
 
-toggler.addEventListener("click", () => {
-  if (container.classList.contains("container-0")) {
-    removePrevTheme(0);
-    changeTheme(1);
-  } else if (container.classList.contains("container-1")) {
-    removePrevTheme(1);
-    changeTheme(2);
-  } else if (container.classList.contains("container-2")) {
-    removePrevTheme(2);
-    changeTheme(0);
+// theme switcher
+const toggler = document.querySelector(".toggler");
+const togglerSwitch = document.querySelector(".toggler-switch");
+const doc = document.documentElement;
+toggler.addEventListener("click", toggleTheme);
+// function to set a given theme
+function setTheme(number) {
+  localStorage.setItem("theme", `theme-${number}`);
+  document.documentElement.className = `theme-${number}`;
+}
+// function to toggle between themes
+function toggleTheme() {
+  if (localStorage.getItem("theme") === "theme-0") {
+    setTheme(1);
+  } else if (localStorage.getItem("theme") === "theme-1") {
+    setTheme(2);
   } else {
+    setTheme(0);
   }
-});
-
-function removePrevTheme(number) {
-  container.classList.remove(`container-${number}`);
-  screen.classList.remove(`screen-${number}`);
-  attribution.classList.remove(`attribution-${number}`);
-  togglerBtn.classList.remove(`toggler-btn-${number}`);
-  togglerSwitch.classList.remove(`toggler-switch-${number}`);
-  keyBox.classList.remove(`key-box-${number}`);
-  del.classList.remove(`del-${number}`);
-  reset.classList.remove(`reset-${number}`);
-  equal.classList.remove(`equal-${number}`);
-  keys.forEach((key) => {
-    key.classList.remove(`key-${number}`);
-  });
 }
-
-function changeTheme(number) {
-  container.classList.add(`container-${number}`);
-  screen.classList.add(`screen-${number}`);
-  attribution.classList.add(`attribution-${number}`);
-  togglerBtn.classList.add(`toggler-btn-${number}`);
-  togglerSwitch.classList.add(`toggler-switch-${number}`);
-  keyBox.classList.add(`key-box-${number}`);
-  del.classList.add(`del-${number}`);
-  reset.classList.add(`reset-${number}`);
-  equal.classList.add(`equal-${number}`);
-  keys.forEach((key) => {
-    key.classList.add(`key-${number}`);
-  });
-}
+// Immediately invoked function to set the theme on initial load
+(function () {
+  if (localStorage.getItem("theme") === "theme-1") {
+    setTheme(1);
+  } else if (localStorage.getItem("theme") === "theme-2") {
+    setTheme(2);
+  } else {
+    setTheme(0);
+  }
+})();
 
 // calculator logic
 const del = document.querySelector(".del");
@@ -150,3 +133,8 @@ point.addEventListener("click", () => {
 
 reset.addEventListener("click", resetAll);
 del.addEventListener("click", deleteLast);
+
+// some gsap animations
+gsap.fromTo(".calculator-box", { scale: 0.85 }, { scale: 1 });
+gsap.fromTo(".attribution", { x: 60 }, { x: 0 });
+gsap.fromTo(".result", { x: -60 }, { x: 0 });
