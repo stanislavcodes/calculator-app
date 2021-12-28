@@ -1,15 +1,3 @@
-// listener to hide attribution
-const keys = document.querySelectorAll(".key");
-const attribution = document.querySelector(".attribution");
-keys.forEach((key) => {
-  key.addEventListener("click", () => {
-    gsap.fromTo(".attribution", { opacity: 1, x:0 }, { opacity: 0, x: 80, duration: 0.25});
-    setTimeout(() => {
-      attribution.style.display = "none"
-    }, 250);
-  });
-});
-
 // theme switcher
 const toggler = document.querySelector(".toggler");
 const togglerSwitch = document.querySelector(".toggler-switch");
@@ -136,5 +124,3 @@ del.addEventListener("click", deleteLast);
 
 // some gsap animations
 gsap.fromTo(".calculator-box", { scale: 0.85 }, { scale: 1 });
-gsap.fromTo(".attribution", { x: 60 }, { x: 0 });
-gsap.fromTo(".result", { x: -60 }, { x: 0 });
