@@ -99,6 +99,7 @@ h3 {
 }
 
 .screen {
+  position: relative;
   margin-top: 2.8rem;
   margin-bottom: 2.4rem;
   border-radius: 1rem;
@@ -127,7 +128,7 @@ h3 {
 .key-box {
   padding: 2.2rem 2.4rem;
   width: 100%;
-  height: 70%;
+  height: 60%;
   border-radius: 1rem;
   display: grid;
   column-gap: 1.3rem;
@@ -158,6 +159,7 @@ h3 {
 }
 
 .key span {
+  font-size: 3.2rem;
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
   -khtml-user-select: none; /* Konqueror HTML */
@@ -182,15 +184,12 @@ h3 {
 
 .key-0 span {
   color: #444b5a;
-  font-size: 3.2rem;
 }
 .key-1 span {
   color: #35352c;
-  font-size: 3.2rem;
 }
 .key-2 span {
   color: #ffe53d;
-  font-size: 3.2rem;
 }
 
 .del span,
@@ -311,16 +310,45 @@ h3 {
   background: #00e0d1;
   box-shadow: 0 0.4rem 0 #6cf9f2;
 }
-/*  
+
 .attribution {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  width: 240px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 1rem;
   font-size: 11px;
-  text-align: center;
 }
-.attribution a {
-  color: hsl(228, 45%, 44%);
-  color: #a69d91;
+
+.attribution span a {
+  margin: 0 2px;
 }
-*/
+.attribution-0 span a {
+  color: #db3937;
+}
+.attribution-1 span a {
+  color: #ca5502;
+}
+.attribution-2 span a {
+  color: #00e0d1;
+}
+
+@media screen and (max-width: 359px) {
+  .key span {
+    font-size: 2.2rem;
+  }
+  .del span,
+  .reset span,
+  .equal span {
+    font-size: 1.4rem;
+    color: #fff;
+  }
+}
 
 @media screen and (min-width: 700px) {
   body {
@@ -330,5 +358,8 @@ h3 {
     margin: auto;
     width: 54rem;
     height: 64.5rem;
+  }
+  .key-box {
+    height: 70%;
   }
 }

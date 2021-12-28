@@ -2,10 +2,17 @@
 const toggler = document.querySelector(".toggler");
 const container = document.querySelector(".container");
 const screen = document.querySelector(".screen");
+const attribution = document.querySelector(".attribution");
 const togglerBtn = document.querySelector(".toggler-btn");
 const togglerSwitch = document.querySelector(".toggler-switch");
 const keyBox = document.querySelector(".key-box");
 const keys = document.querySelectorAll(".key");
+
+keys.forEach((key) => {
+  key.addEventListener("click", () => {
+    attribution.style.display = "none";
+  });
+});
 
 toggler.addEventListener("click", () => {
   if (container.classList.contains("container-0")) {
@@ -24,6 +31,7 @@ toggler.addEventListener("click", () => {
 function removePrevTheme(number) {
   container.classList.remove(`container-${number}`);
   screen.classList.remove(`screen-${number}`);
+  attribution.classList.remove(`attribution-${number}`);
   togglerBtn.classList.remove(`toggler-btn-${number}`);
   togglerSwitch.classList.remove(`toggler-switch-${number}`);
   keyBox.classList.remove(`key-box-${number}`);
@@ -38,6 +46,7 @@ function removePrevTheme(number) {
 function changeTheme(number) {
   container.classList.add(`container-${number}`);
   screen.classList.add(`screen-${number}`);
+  attribution.classList.add(`attribution-${number}`);
   togglerBtn.classList.add(`toggler-btn-${number}`);
   togglerSwitch.classList.add(`toggler-switch-${number}`);
   keyBox.classList.add(`key-box-${number}`);
@@ -141,55 +150,3 @@ point.addEventListener("click", () => {
 
 reset.addEventListener("click", resetAll);
 del.addEventListener("click", deleteLast);
-
-// numbers.forEach((number) => {
-//   number.addEventListener("click", inputValues);
-// });
-
-// function inputValues() {
-//   if (resultBox.innerHTML.length == 1 && !firstEntered) {
-//     current = String(this.dataset.num);
-//     firstEntered = true;
-//   } else {
-//     current += String(this.dataset.num);
-//   }
-//   resultBox.innerHTML = current;
-// }
-
-// operations.forEach((operation) => {
-//   operation.addEventListener("click", operate);
-// operation.addEventListener("click", () => {
-// if (currentResult != 0) {
-//   currentResult = evaluate(currentResult, lastOperation, Number(current));
-//   currentResult = Math.round(currentResult * 100) / 100;
-//   resetValues();
-// } else {
-//   currentResult = Number(current);
-//   resetValues();
-// }
-// lastOperation = String(operation.dataset.op);
-// console.log(currentResult);
-// });
-// });
-
-// equal.addEventListener("click", () => {
-//   if (currentResult != 0) {
-//     currentResult = evaluate();
-//     currentResult = Math.round(currentResult * 100) / 100;
-//     resetValues();
-//     resultBox.innerHTML = String(currentResult);
-//     lastOperation = "";
-//   } else {
-//   }
-//   resultShowed = true;
-// });
-
-// functions
-
-/*  plan:
-    1           2           3
-Get number1 =>  store it => wait for (=) or (op):
-                            if (=)  =>  output stored number.
-                            if (op) =>  wait for another number =>
-                                        get number2 => process two numbers & store result => repeat from 3d stage
-*/
