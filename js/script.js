@@ -1,3 +1,4 @@
+// theme switcher
 const toggler = document.querySelector(".toggler");
 const container = document.querySelector(".container");
 const screen = document.querySelector(".screen");
@@ -6,7 +7,6 @@ const togglerSwitch = document.querySelector(".toggler-switch");
 const keyBox = document.querySelector(".key-box");
 const keys = document.querySelectorAll(".key");
 
-// theme switcher
 toggler.addEventListener("click", () => {
   if (container.classList.contains("container-0")) {
     removePrevTheme(0);
@@ -57,108 +57,90 @@ const point = document.querySelector(".point");
 const numbers = document.querySelectorAll(".number");
 const operations = document.querySelectorAll(".operation");
 let resultBox = document.querySelector(".result");
-
-let currentValue = "0",
-  currentResult = 0,
-  lastOperation = "",
+let operator = "",
+  current = "0",
+  previous = "0",
   result = 0,
   firstEntered = false,
-  pointsEntered = 0;
+  resultShowed = false;
 
-resultBox.innerHTML = String(currentValue);
-
-numbers.forEach((number) => {
-  number.addEventListener("click", inputValues);
-});
-
-function inputValues() {
-  if (resultBox.innerHTML.length == 1 && !firstEntered) {
-    currentValue = String(this.dataset.num);
-    firstEntered = true;
-  } else {
-    currentValue += String(this.dataset.num);
-  }
-  resultBox.innerHTML = currentValue;
+// functions
+function evaluate(num1, op, num2) {
+  return eval(num1 + op + num2);
 }
 
+function updateResultScreen(value) {
+  resultBox.innerHTML = value;
+}
+
+function resetCurrent() {
+  current = "0";
+  firstEntered = false;
+}
+function resetAll() {
+  resetCurrent();
+  operator = "";
+  previous = "0";
+  updateResultScreen("0");
+}
+function deleteLast() {
+  current = current.slice(0, -1);
+  updateResultScreen(current);
+  if (resultBox.innerHTML.length < 1) {
+    firstEntered = false;
+    updateResultScreen("0");
+  }
+}
+
+function input() {
+  if (!firstEntered) {
+    current = this.dataset.num;
+    firstEntered = true;
+  } else {
+    current += this.dataset.num;
+  }
+  updateResultScreen(current);
+}
+
+function operate() {
+  if ((previous == "0" && resultShowed == false) || resultShowed == true) {
+    previous = current;
+  } else {
+    previous = evaluate(previous, operator, current);
+    previous = Math.round(Number(previous) * 1000) / 1000;
+    updateResultScreen(String(previous));
+  }
+  operator = this.dataset.op;
+  resetCurrent();
+}
+
+// event listeners
+numbers.forEach((number) => {
+  number.addEventListener("click", input);
+});
+
 operations.forEach((operation) => {
-  operation.addEventListener("click", () => {
-    if (currentResult != 0) {
-      currentResult = evaluate(
-        currentResult,
-        lastOperation,
-        Number(currentValue)
-      );
-      currentResult = Math.round(currentResult * 100) / 100;
-      resetValues();
-    } else {
-      currentResult = Number(currentValue);
-      resetValues();
-    }
-    lastOperation = String(operation.dataset.op);
-    console.log(currentResult);
-  });
+  operation.addEventListener("click", operate);
 });
 
 equal.addEventListener("click", () => {
-  if (currentResult != 0) {
-    currentResult = evaluate(
-      currentResult,
-      lastOperation,
-      Number(currentValue)
-    );
-    currentResult = Math.round(currentResult * 100) / 100;
-    resetValues();
-    resultBox.innerHTML = String(currentResult);
-    lastOperation = "";
-  } else {
-  }
+  previous = evaluate(previous, operator, current);
+  previous = Math.round(Number(previous) * 1000) / 1000;
+  current = String(previous);
+  updateResultScreen(current);
+  resultShowed = true;
 });
-
-function evaluate(num1, op1, num2) {
-  return eval(num1 + op1 + num2);
-}
 
 // listener to control that there is only one point in number
 point.addEventListener("click", () => {
-  pointsEntered++;
-  if (pointsEntered > 1) {
-  } else {
-    currentValue += ".";
-    resultBox.innerHTML = currentValue;
+  if (!resultBox.innerHTML.includes(".")) {
+    current += ".";
+    updateResultScreen(current);
   }
 });
 
-del.addEventListener("click", () => {
-  currentValue = currentValue.slice(0, -1);
-  resultBox.innerHTML = currentValue;
-  if (resultBox.innerHTML.length < 1) {
-    firstEntered = false;
-    resultBox.innerHTML = "0";
-  }
-});
-
-reset.addEventListener("click", () => {
-  resetValues();
-  currentResult = 0;
-});
-
-function resetValues() {
-  currentValue = "0";
-  firstEntered = false;
-  pointsEntered = 0;
-  resultBox.innerHTML = currentValue;
-}
-
-/////////////////////////////////////////////////////
-// let values = [],
-//   ops = [] /*operations*/,
-//   current = "0",
-//   result = 0,
-//   firstEntered = false,
-//   pointsEntered = 0;
-
-// resultBox.innerHTML = String(current);
+reset.addEventListener("click", resetAll);
+del.addEventListener("click", deleteLast);
 
 // numbers.forEach((number) => {
 //   number.addEventListener("click", inputValues);
@@ -174,56 +156,40 @@ function resetValues() {
 //   resultBox.innerHTML = current;
 // }
 
-// point.addEventListener("click", () => {
-//   pointsEntered++;
-//   if (pointsEntered > 1) {
-//   } else {
-//     current += ".";
-//     resultBox.innerHTML = current;
-//   }
-// });
-
 // operations.forEach((operation) => {
-//   operation.addEventListener("click", () => {
-//     let temp = current;
-//     values.push(Number(temp));
-//     ops.push(String(operation.dataset.op));
-//     resetValues();
-//     console.log(ops);
-//   });
-// });
-
-// del.addEventListener("click", () => {
-//   current = current.slice(0, -1);
-//   resultBox.innerHTML = current;
-//   if (resultBox.innerHTML.length < 1) {
-//     firstEntered = false;
-//     resultBox.innerHTML = "0";
-//   }
-// });
-
-// reset.addEventListener("click", () => {
+//   operation.addEventListener("click", operate);
+// operation.addEventListener("click", () => {
+// if (currentResult != 0) {
+//   currentResult = evaluate(currentResult, lastOperation, Number(current));
+//   currentResult = Math.round(currentResult * 100) / 100;
 //   resetValues();
-//   resetArrays();
+// } else {
+//   currentResult = Number(current);
+//   resetValues();
+// }
+// lastOperation = String(operation.dataset.op);
+// console.log(currentResult);
 // });
-
-// function resetValues() {
-//   current = "0";
-//   firstEntered = false;
-//   pointsEntered = 0;
-//   resultBox.innerHTML = current;
-// }
-
-// function resetArrays() {
-//   values = [];
-//   ops = [];
-// }
+// });
 
 // equal.addEventListener("click", () => {
-//   // console.log(eval(values[0] + ops[0] + values[1] + ops[1] + values[2]));
-//   // resultBox.innerHTML = String(result);
+//   if (currentResult != 0) {
+//     currentResult = evaluate();
+//     currentResult = Math.round(currentResult * 100) / 100;
+//     resetValues();
+//     resultBox.innerHTML = String(currentResult);
+//     lastOperation = "";
+//   } else {
+//   }
+//   resultShowed = true;
 // });
 
-// function evaluate(num1, op1, num2) {
-//   return eval(num1 + op1 + num2);
-// }
+// functions
+
+/*  plan:
+    1           2           3
+Get number1 =>  store it => wait for (=) or (op):
+                            if (=)  =>  output stored number.
+                            if (op) =>  wait for another number =>
+                                        get number2 => process two numbers & store result => repeat from 3d stage
+*/

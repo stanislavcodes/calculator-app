@@ -107,6 +107,7 @@ h3 {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  overflow: hidden;
 }
 
 .screen-0 {
