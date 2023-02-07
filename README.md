@@ -1,6 +1,4 @@
-# Frontend Mentor - Calculator app
-
-## by Stanislav Korchevskyi!
+# Frontend Mentor - Calculator app Challenge
 
 ![Preview of my solution](./images/screenshot.png)
 
